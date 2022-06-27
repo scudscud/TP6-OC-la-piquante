@@ -5,7 +5,7 @@ const sauceRouter = require("./route/sauces")
 
 mongoose
   .connect(
-    "mongodb+srv://scud:5kJhE8iHJmmyMg8E@cluster0.aplke7d.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://scud:5kJhE8iHJmmyMg8E@cluster0.vfl0poz.mongodb.net/?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
