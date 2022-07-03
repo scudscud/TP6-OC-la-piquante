@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 const uniqueValidator = require('mongoose-unique-validator');
-const { disable } = require("../app");
+
 
 const userSchema = mongoose.Schema({
  email: {type : String , required: true, unique: true},
