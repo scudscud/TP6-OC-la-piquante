@@ -5,7 +5,7 @@ const sauceRouter = require("./route/sauces");
 const userRouter = require("./route/users");
 const path = require("path");
 app.use(express.json());
-
+ // ----- connect mongoose ------ \\
 mongoose
   .connect(
     "mongodb+srv://scud:5kJhE8iHJmmyMg8E@cluster0.vfl0poz.mongodb.net/?retryWrites=true&w=majority",
@@ -13,7 +13,7 @@ mongoose
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
-
+ // ----- app generale ------ \\
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -26,7 +26,10 @@ app.use((req, res, next) => {
   );
   next();
 });
+ // ----- app sauces------ \\
 app.use("/api/sauces", sauceRouter);
+ // ----- app authentification----- \\
 app.use("/api/auth", userRouter);
+ // ----- app images------ \\
 app.use("/images", express.static(path.join(__dirname, "images")));
 module.exports = app;
