@@ -134,32 +134,49 @@ exports.likeUpdateSauce = (req, res, next) => {
   // console.log(id);
 
   Sauce.findOne(id)
-  .then((click) => {
-    // console.log(click);
-    switch (userLike){ 
-    case 1:{
-  click.likes++,
-  click.usersLiked.push(user)
-//  click.updateOne({$push:{usersLiked: user})
-  click.save();
-}break;
-
-
-
-
-
-
-
-
-
-default : console.log("default");
-}
-}
-)
-
-.then(()=>res.status(201).json("ok"))  
-.catch((error) => res.status(400).json({ error }));
-
+    .then((click) => {
+      // console.log(click);
+      switch (userLike) {
+        case 1:
+          {
+            click.likes++, click.usersLiked.push(user);
+            //  click.updateOne({$push:{usersLiked: user})
+            click.save()
+            
+            console.log("like pris en compte");
+          }
+          break;
+        case -1:
+          {
+            click.dislikes++, click.usersDisliked.push(user);
+            click.save()
+            
+            console.log("dislike pris en compte");
+          }
+          break;
+        case 0:
+          {
+            if (click.usersLiked.includes(user)) {
+              click.likes--;
+              click.usersLiked.pull(user);
+              click.save();
+    
+              console.log("dislike pris en compte");
+            } else {
+              click.dislikes--;
+              click.usersDisliked.pull(user);
+              click.save()
+             
+              console.log("like pris en compte");
+            }
+          }
+          break;
+        default:
+          console.log("il y a surement une erreur");
+      }
+    })
+    .then(() => res.status(201).json("ok"))
+    .catch((error) => res.status(400).json({ error }));
 };
 
 // exports.likeUpdateSauce = (req, res, next) => {
@@ -181,7 +198,7 @@ default : console.log("default");
 //             console.log(typeof click.usersLiked);
 //             console.log(click.usersLiked);
 //             click.updateOne({ usersLiked : "user", likes: 1 })
-          
+
 //               .then(() => res.status(201).json("ok"))
 //               .catch((error) => res.status(400).json({ error }));
 //             click.save();
