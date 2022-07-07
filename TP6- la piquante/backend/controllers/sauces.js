@@ -138,28 +138,22 @@ exports.likeUpdateSauce = (req, res, next) => {
     // console.log(click);
     switch (userLike){ 
     case 1:{
-  // if(!click.usersLiked.includes(user) && userLike === 1){
-  console.log(click);
-  console.log(id);
-  // console.log(click.usersLiked);
-  console.log(click.likes)
-  // console.log(user);
-  // console.log(userLike);
-  // console.log(id);
   click.likes++,
- click.updateOne({usersLiked: user}
-  )
- 
+  click.usersLiked.push(user)
+//  click.updateOne({$push:{usersLiked: user})
   click.save();
 }break;
- default : console.log("default");
+
+
+
+
+
+
+
+
+
+default : console.log("default");
 }
-
-
-
-// }
-
-// }
 }
 )
 
