@@ -106,18 +106,18 @@ exports.likeUpdateSauce = (req, res, next) => {
               click.likes--;
               click.usersLiked.pull(user);
               click.save();
-              console.log("like retirer");
+              // console.log("like retirer");
             } else {
                 // ----- retrait du dislike ------- \\
               click.dislikes--;
               click.usersDisliked.pull(user);
               click.save();
-              console.log("dislike retirer");
+              // console.log("dislike retirer");
             }
           }break;
         default:console.log("il y a surement une erreur");
       };
     })
-    .then(() => res.status(201).json("ok"))
+    .then(() => res.status(201).json("mise a jour des likes dislikes"))
     .catch((error) => res.status(400).json({ error }));
 };
