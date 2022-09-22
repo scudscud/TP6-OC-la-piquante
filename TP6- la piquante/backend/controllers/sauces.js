@@ -44,8 +44,6 @@ exports.deleteSauce = (req, res, next) => {
  exports.modififySauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
   .then((sauce) => {
-    console.log(req.file);
-    console.log(sauce);
   const filename = sauce.imageUrl.split("/images/")[1];
   if (req.file !== undefined){
       fs.unlink(`images/${filename}`,(err)=>{
