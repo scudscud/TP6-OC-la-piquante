@@ -1,11 +1,10 @@
-const mongoose = require("mongoose");
+
 const Sauce = require("../models/sauce");
 const fs = require("fs");
-const sauce = require("../models/sauce");
-// const  log  = require("console");
-// const  json  = require("express");
+
 // ----- creer une sauce ------- \\
 exports.createSauce = (req, res, next) => {
+
   const sauceObject = JSON.parse(req.body.sauce);
   delete sauceObject._id;
   delete sauceObject._userId;
@@ -49,11 +48,11 @@ exports.deleteSauce = (req, res, next) => {
       fs.unlink(`images/${filename}`,(err)=>{
         if (err){ console.log(err);}else {console.log('ok');}
       })
-  const sauceObject = req.file ? 
+  const sauceObject = 
   { 
       ...JSON.parse(req.body.sauce),
       imageUrl : `${req.protocol}://${req.get('host')}/images/${req.file.filename}` 
-   } : { ...req.body }
+   } 
   Sauce.updateOne({_id : req.params.id},{...sauceObject, _id : req.params.id})
   .then(res.status(200).json({message : 'sauce modifié'}))
   .catch(error => res.status(404).json({error})) 
