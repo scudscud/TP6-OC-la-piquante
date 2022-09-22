@@ -9,7 +9,7 @@ router.get("/", auth, ctrSauce.findSauce);
   // ----- trouver une sauce ------- \\
 router.get("/:id", auth, ctrSauce.findOneSauce);
   // ----- modifier une sauce ------- \\
-router.put("/:id", auth, ctrSauce.modififySauce);
+router.put("/:id", auth,multer, ctrSauce.modififySauce);
   // ----- supprimer une sauce ------- \\
 router.delete("/:id", auth, ctrSauce.deleteSauce);
   // ----- creer une sauce ------- \\
