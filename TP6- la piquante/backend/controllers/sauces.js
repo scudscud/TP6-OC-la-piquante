@@ -60,12 +60,7 @@ exports.deleteSauce = (req, res, next) => {
   .then(res.status(200).json({message : 'sauce modifié'}))
   .catch(error => res.status(404).json({error})) 
   }else{
-    const sauceObject = req.file ? 
-    { 
-        ...JSON.parse(req.body.sauce),
-        imageUrl : `${req.protocol}://${req.get('host')}/images/${req.file.filename}` 
-     } : { ...req.body }
-    Sauce.updateOne({_id : req.params.id},{...sauceObject, _id : req.params.id})
+    Sauce.updateOne({_id : req.params.id},{...req.body, _id : req.params.id})
     .then(res.status(200).json({message : 'sauce modifié'}))
     .catch(error => res.status(404).json({error})) 
   }
