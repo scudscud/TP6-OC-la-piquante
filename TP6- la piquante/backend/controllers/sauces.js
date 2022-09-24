@@ -1,9 +1,48 @@
 
 const Sauce = require("../models/sauce");
 const fs = require("fs");
-
+const path = "../images";
 // ----- creer une sauce ------- \\
 exports.createSauce = (req, res, next) => {
+
+
+const dir = '../backend/images';
+  
+  if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
+  }
+
+
+
+
+
+
+
+
+//'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''\\
+  // fs.access(path, (error) => {
+   
+  //   // To check if the given directory 
+  //   // already exists or not
+  //   if (error) {
+  //     // If current directory does not exist
+  //     // then create it
+  //     fs.mkdir(path, (error) => {
+  //       if (error) {
+  //         console.log(error);
+  //       } else {
+  //         console.log("New Directory created successfully !!");
+  //       }
+  //     });
+  //   } else {
+  //     console.log("Given Directory already exists !!");
+  //   }
+  // });
+//'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''\\
+
+
+
+
 
   const sauceObject = JSON.parse(req.body.sauce);
   delete sauceObject._id;
