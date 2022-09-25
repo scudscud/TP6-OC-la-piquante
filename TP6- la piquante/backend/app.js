@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const fs = require("fs");
 const mongoose = require("mongoose");
 const sauceRouter = require("./route/sauces");
 const userRouter = require("./route/users");
@@ -7,6 +8,14 @@ const path = require("path");
 const dotenv = require('dotenv')
 dotenv.config()
 app.use(express.json());
+
+const dir = "./images";
+if (!fs.existsSync(dir)) {
+  console.log('test');
+  fs.mkdirSync(dir);
+  console.log('test');
+}
+
  // ----- connect mongoose ------ \\
 mongoose
   .connect(

@@ -11,9 +11,12 @@ exports.signup = (req, res, nest) => {
         email: req.body.email,
         username: req.body.username,
         password: hash,
-      });
+      }
+      
+      
+      );
       user
-        .save()
+        .save({ runValidators: true })
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
         .catch((error) => res.status(400).json({ error }));
     })
