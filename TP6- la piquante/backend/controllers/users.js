@@ -4,6 +4,15 @@ const jwt = require("jsonwebtoken");
 // ----- user signup------ \\
 exports.signup = (req, res, nest) => {
 
+ let psw = req.body.password;
+ let pswValid = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(psw);
+console.log(pswValid);
+if (pswValid === false){
+
+ res.status(406).json()
+ }
+
+else{
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
@@ -16,11 +25,12 @@ exports.signup = (req, res, nest) => {
       
       );
       user
-        .save({ runValidators: true })
+        .save()
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
         .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => res.status(500).json({ error }));
+  }
 };
 // ----- user login ------ \\
 exports.login = (req, res, next) => {
