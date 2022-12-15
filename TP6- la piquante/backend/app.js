@@ -5,26 +5,26 @@ const mongoose = require("mongoose");
 const sauceRouter = require("./route/sauces");
 const userRouter = require("./route/users");
 const path = require("path");
-const dotenv = require('dotenv')
-dotenv.config()
+const dotenv = require("dotenv");
+dotenv.config();
 app.use(express.json());
 
 const dir = "./images";
 if (!fs.existsSync(dir)) {
-  console.log('test');
+  console.log("test");
   fs.mkdirSync(dir);
-  console.log('test');
+  console.log("test");
 }
 
- // ----- connect mongoose ------ \\
+// ----- connect mongoose ------ \\
 mongoose
-  .connect(
-    process.env.CONNECT,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(process.env.CONNECT, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
- // ----- app generale ------ \\
+// ----- app generale ------ \\
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -37,10 +37,10 @@ app.use((req, res, next) => {
   );
   next();
 });
- // ----- app sauces------ \\
+// ----- app sauces------ \\
 app.use("/api/sauces", sauceRouter);
- // ----- app authentification----- \\
+// ----- app authentification----- \\
 app.use("/api/auth", userRouter);
- // ----- app images------ \\
+// ----- app images------ \\
 app.use("/images", express.static(path.join(__dirname, "images")));
 module.exports = app;
