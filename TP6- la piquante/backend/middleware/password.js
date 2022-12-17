@@ -12,6 +12,6 @@ module.exports = (req,res,next) => {
     if(passSchema.validate(req.body.password)){
         next()
     }else{
-     res.status(406).json()
+     res.status(400).json("le mot de passe doit contenir 8 carateres, 1 chiffre , 1 majuscule et 1 miniscule")
     }
 }
